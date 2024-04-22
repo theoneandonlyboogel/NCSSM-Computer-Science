@@ -43,3 +43,7 @@ elif userStatement == 4:
         temp2 = int(input("Fahrenheit: "))
         print(f"{temp2}°F ----> {round((temp2-32)*5/9)}°C")
 
+elif userStatement == 9:
+    first = input("First Name: ")
+    last = input("Last Name: ")
+    print(first+last)
