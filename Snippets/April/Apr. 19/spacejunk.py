@@ -1,7 +1,11 @@
 #idea is to have a space junk dodging game with live timers on one side, something else on the other side that i need to figure out but also needs to be interactive
 import time #for timing inputs in the debris section
+import count_timer.quickstart
 import pyfiglet #for ascii art
 from inputimeout import inputimeout, TimeoutOccurred
+import count_timer
+from countdown import countdown
+import threading
 
 
 completed = False
@@ -42,26 +46,20 @@ def intro():
     else:
         return True
 
+
+
 def debrisPath(sequence, timer):
-    completed = False
-    start_time = time.time()  # Record the start time
+    times = time.time
     while True:
-        remaining_time = timer - (time.time() - start_time)
-        if remaining_time <= 0:
-            print(f"\n{gameOver}")
+        print(f"\nInput {sequence} before the timer expires to dodge the space junk.\n")
+        userInput = input(f"{countdown(mins=0, secs=timer)}")
+        if userInput == sequence:
+            print("Nice! You dodged the space junk!")
+            return True
+        elif userInput != sequence and float(times) > 0:
+            continue
+        else:
             break
-        try:
-            user_input = inputimeout(prompt=f"\rA large piece of debris is fast approaching! Enter {sequence} in the next {round(remaining_time, 1)} seconds to avoid the debris: ", timeout=1)
-            if user_input == sequence:
-                print("Debris avoided successfully!")
-                completed = True
-                break
-            else:
-                print(gameOver)
-                break
-        except TimeoutOccurred:
-            pass  # Continue the loop if no input is received within the timeout period
-    return completed
 
 
     
@@ -78,16 +76,13 @@ def main():
         choice1 = int(input(f"{spaceFrame1}\n{spaceText1}"))
         if choice1 == 2:
             print("You have chosen the debris path. Get ready to dodge space junk.")
-            debrisPath("low", 4)
-            if completed == True:
+            if debrisPath("low", 4) == True:
                 print("You continue your flight rapidly towards the Earth, but another piece of space junk found itself in your path. GET READY TO DODGE!")
                 time.sleep(3)
-                debrisPath("up", 3)
-                if completed == True:
-                    print("You're almost there, but yet another piece of debris wanders into your path to the landing path. Its now or never. DODGE THAT SPACE JUNK!")
-                    time.sleep(3)
-                    debrisPath("right", 3)
-                    if completed == True:
+                if debrisPath("up", 3) == True:
+                    print("You're almost to the landing pad, but yet another piece of space junk crosses your path. It's now or never: TIME TO DODGE!")
+                    time.sleep(10)
+                    if debrisPath("right", 5) == True:
                         print(gameWon)
 
 
@@ -106,23 +101,18 @@ main()
 
 """
 def debrisPath(sequence, timer):
-    print("You have chosen the debris path. Get ready to dodge space junk.")
-    sequences = ["n", "9", "di"]
-    timer1 = 3.5
     start_time = time.time()  # Record the start time
     while True:
-        remaining_time = timer1 - (time.time() - start_time)
+        remaining_time = timer - (time.time() - start_time)
         if remaining_time <= 0:
             print(f"\n{gameOver}")
             break
         try:
-            user_input = inputimeout(prompt=f"\rA large piece of debris is fast approaching! Enter {sequences[0]} in the next {round(remaining_time, 1)} seconds to avoid the debris: ", timeout=0.5)
-            if user_input == sequences[0]:
-                print("Debris avoided successfully!")
-                break
+            user_input = input(f"You have {round(remaining_time, 1)} seconds until a large piece of debris collides with your ship!\nEnter {sequence} to avoid the debris: ", end="\r")
+            if user_input == sequence:
+                return True
             else:
                 print(gameOver)
                 break
         except TimeoutOccurred:
-            pass  # Continue the loop if no input is received within the timeout period
-        """
+            pass  # Continue the loop if no input is received within the timeout period"""

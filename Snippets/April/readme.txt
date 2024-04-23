@@ -1,0 +1,1 @@
+Files are not logged in order of completion, but on creation date. Some projects, like spacejunk, were multiple day endeavors.
