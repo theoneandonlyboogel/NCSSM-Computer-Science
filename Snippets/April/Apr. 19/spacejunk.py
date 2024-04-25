@@ -1,11 +1,9 @@
 #idea is to have a space junk dodging game with live timers on one side, something else on the other side that i need to figure out but also needs to be interactive
 import time #for timing inputs in the debris section
-import count_timer.quickstart
 import pyfiglet #for ascii art
-from inputimeout import inputimeout, TimeoutOccurred
-import count_timer
-from countdown import countdown
-import threading
+from inputimeout import inputimeout, TimeoutOccurred #idk if ill use this
+
+
 
 
 completed = False
@@ -47,25 +45,28 @@ def intro():
         return True
 
 
-
 def debrisPath(sequence, timer):
-    times = time.time
     while True:
-        print(f"\nInput {sequence} before the timer expires to dodge the space junk.\n")
-        userInput = input(f"{countdown(mins=0, secs=timer)}")
+        print(f"Input --> {sequence} <-- in the next {timer} seconds to dodge the space junk.")
+        userInput = inputimeout(prompt="", timeout=timer)
         if userInput == sequence:
             print("Nice! You dodged the space junk!")
+            time.sleep(1)
             return True
-        elif userInput != sequence and float(times) > 0:
+        if userInput != sequence and TimeoutOccurred == False:
             continue
-        else:
+        if TimeoutOccurred:
+            print(gameOver)
             break
-
+        
 
     
 def pathAround():
-    print("You have chosen to fly around Earth. However, your ship's treasurer has miscalculated the amount of fuel you have left, and without some drastic measures, you won't be able to make it to Earth in time. Get ready to make some difficult chocies.")
-    time.sleep(3)
+    print("You have chosen to fly around Earth. However, your ship's treasurer has miscalculated the amount of fuel you have left, and \nwithout some drastic measures, you won't be able to make it to Earth in time. Get ready to make some difficult choices.")
+    time.sleep(5)
+    userInput = input("")
+
+
 
 
 
@@ -76,20 +77,26 @@ def main():
         choice1 = int(input(f"{spaceFrame1}\n{spaceText1}"))
         if choice1 == 2:
             print("You have chosen the debris path. Get ready to dodge space junk.")
+            time.sleep(4)
             if debrisPath("low", 4) == True:
-                print("You continue your flight rapidly towards the Earth, but another piece of space junk found itself in your path. GET READY TO DODGE!")
-                time.sleep(3)
+                print("You continue your flight rapidly towards the Earth, but another piece of space junk found itself in your path. \nGET READY TO DODGE!")
+                time.sleep(5)
                 if debrisPath("up", 3) == True:
                     print("You're almost to the landing pad, but yet another piece of space junk crosses your path. It's now or never: TIME TO DODGE!")
-                    time.sleep(10)
+                    time.sleep(5)
                     if debrisPath("right", 5) == True:
                         print(gameWon)
+        elif choice1 == 1:
+            pathAround()
+            
+        
+        else:
+            print("Try again.")
 
 
             
 
-    elif choice1 == 1:
-        pathAround()
+
             
 
     
