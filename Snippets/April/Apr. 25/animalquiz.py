@@ -1,9 +1,9 @@
 import time
 
-#animal quiz
+#animal quiz intro
 print("Welcome to the animal quiz. Inputs are case and space insensitive.")
 
-
+#open ended question, 3 guesses
 def openQuestion(prompt, answer):
     global score
     attemptsRemaining = 3
@@ -43,6 +43,7 @@ def multipleChoice(prompt, A, B, C, D, correctAnswer):
     return score
 
 def trueFalse(prompt, answer):
+    #True False question, one guess
     global score
     print(f"True or false: {prompt}")
     time.sleep(1.5)
@@ -59,6 +60,7 @@ def trueFalse(prompt, answer):
 score = 0
 
 def main():
+    #calling each function with their arguments
     trueFalse("Cheetas roar, like all big cats.", "false")
     openQuestion("What has webbed feet, quacks like it's always gossiping, and enjoys swimming? ", "duck")
     trueFalse("Sea otters have favorite rocks they use to crack open their food with.", "true")
