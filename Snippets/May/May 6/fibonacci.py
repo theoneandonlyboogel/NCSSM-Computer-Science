@@ -1,30 +1,18 @@
-"""
-def printFib(length):  
-    first = 0
-    second = 1
-    
-    #print the intitial fib 
-    print(first, second)
-
-    #decrease length by 2
-    length -= 2
-    
-    while length > 0:
-        #printing the next number
-        print(first + second)
-        #update first/second
-        temp = second
-        second = first + second
-        first = temp
-        length =- 1
-"""
+fibs = []
 def fibo(first, second, length):
     if length == 0:
         return
     
-    print(first + second)
+    third = first+second
+    print(third)
+    fibs.append(third)
     #recursively call the function (updating the values)
     fibo(second, first + second, length -1)
+i = int(input("How many sequences? "))
+sequenceTF = bool(input("Do you want a specific sequence? Press enter for No, any key and enter for yes. "))
 
-#call that bad boy
-fibo(0, 1, 100 -2)
+if sequenceTF == True:
+    sequenceNum = int(input("Which sequence do you want? "))
+fibo(0, 1, i)
+if bool(sequenceNum) == True:
+    print(f"-----------------------------------------\n{fibs[sequenceNum-1]}")
