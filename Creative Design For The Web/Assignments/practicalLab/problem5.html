@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Problem5</title>
+        <link rel="stylesheet" href="mosaic.css">
+    </head>
+    <body>
+        <h1>Problem 5</h1>
+        <h2>A Lovely Mosaic of Interlocking Parts</h2>
+        <p>
+            And now it's time to reveal a perplexing puzzle of prodigious proprtions. 
+            This is a challenge that requires finesse and it's tantamount to sprinting 
+            through gooey chewing gum. Be reminded that table header cells are yellow 
+            and table datum cells are white. For your convenience, a style sheet is linked 
+            in that makes the "tiles" a nice size.
+        </p>
+        <table align="center">
+            <!--First row. th goes to the next row, both tds stay on row 1.-->
+            <tr>
+                <td colspan="2"></td>
+                <th rowspan="2"></th>
+                <td colspan="2"></td>
+            </tr>
+            <!--Second row. ths go down 2 more rows, both tds are basically just filler, and make one while tile.-->
+            <tr>
+                <th rowspan="3"></th>
+                <td></td>
+                <td></td>
+                <th rowspan="3"></th>
+            </tr>
+            <!--Third row. td goes across rows (2, 3), (3, 3), and (4, 3).-->
+            <tr>
+                <td colspan="3"></td>
+            </tr>
+            <!--Fourth row. th goes down one more row, tds are filler (one tile).-->
+            <tr>
+                <td></td>
+                <th rowspan="2"></th>
+                <td></td>
+            </tr>
+            <!--Fifth and final row, both tds go across, avoiding the middle tile.-->
+            <tr>
+                <td colspan="2"></td>
+                <td colspan="2"></td>
+            </tr>
+        </table>
+    </body>
+</html>

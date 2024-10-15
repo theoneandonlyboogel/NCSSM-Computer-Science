@@ -1,0 +1,14 @@
+td, th
+{
+    height: 75px;
+    width:75px;
+}
+th
+{
+    background-color:#FFFF00;
+}  
+table, th, td
+{ 
+    border: solid 1px black;
+    border-collapse:collapse;
+}
