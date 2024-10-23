@@ -1,0 +1,12 @@
+h1 {
+    font-size: 100px;
+    text-align: center;
+    color: blue;
+
+}
+
+*/ can combine different elements in the same group 
+p, h2 {
+    font-size: 20px;
+    color: black;
+}

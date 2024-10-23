@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CSS-ififed HTML Notes</title>
+        <link rel="stylesheet" href="cssnotes2.css">
+    </head>
+    <body>
+        <header>
+            <h1>HTML Intro - Honors Web Design 2024</h1>
+            <nav class="flex-nav">
+                <a href="#header" class="headers">Headers</a>
+                <a href="#paragraphs" class="paragraphs">Paragraphs</a>
+                <a href="#favoriteWebsite" class="favoriteWebsite">Favorite Website</a>
+                <a href="#tables" class="tables">Tables</a>
+                <a href="#forms" class="forms">Forms</a>
+                <a href="#specialCharacters" class="specialCharacters">Special Characters</a>
+                <a href="#format" class="format">Format</a>
+                <a href="#container" class="container">Container</a>
+            </nav>
+        </header>
+        <main>
+            <section id="headers" class="headers">
+                <h2>Hello World!</h2>
+                <h3>Hello World!</h3>
+                <h4>Hello World!</h4>
+                <h5>Hello World!</h5>
+            </section>
+            <hr>
+            <section id="paragraphs" class="paragraphs">
+                <h2>My favorite books</h2>
+                <p>I am a frequent reader, and find myself reading a lot of Science/Young Adult Fiction recently. I wanted to make a list of all of those things, and put them in website form for this assignment.
+                Most book series I have read I've liked, but some of them have really captivated my attention, and some of them make their way into my mind for weeks afterward, and change how I think about the world around me.
+                One of my favorite authors recently has been Marie Lu, because her books have some way of engaging me so well that I've stayed up for hours just reading those books. Even the books I've read for some
+                of my classes have been uncharacteristically good recently, like <a href="https://en.wikipedia.org/wiki/Night_(memoir)">Night,</a> by Elie Wiesel. Without any further ado, here are some of my favorite books I've read recently, in no particular order.
+                </p>
+                <h2>My Favorite Books of Late:</h2>
+                <ul>
+                    <li>Steelstriker, Marie Lu</li>
+                    <li>The fault in our Stars, John Green</li>
+                    <li>20,000 Leagues under the Sea, Jules Verne</li>
+                    <li>Eleanor and Park, Rainbow Rowell</li>
+                    <li>Ender's Game, Orson Scott Card</li>
+                    <li>Stars and Smoke, Marie Lu</li>
+                </ul>
+                <p>There are definitely other books that I've read from before, but those are the ones in recent memory. I've thoroughly enjoyed every book I've read, and I believe that reading books is something that everyone
+                    should do every once in a while. Anyway, that's enough from me. That's my favorite books recently, and that's my first actual website.
+                </p>
+                <hr>
+                <h2>My Most Played Games, by playtime</h2>
+                <ol>
+                    <li>Deep Rock Galactic - 390hrs</li>
+                    <li>Terraria - 329hrs</li>
+                    <li>Factorio - 259hrs</li>
+                    <li>Stardew Valley - 163hrs</li>
+                    <li>Satisfactory - 89hrs</li>
+                </ol>
+            </section>
+            
+            <section id="favoriteWebsite" class="favoriteWebsite">
+                <h2>My favorite website is:</h2>
+                <a href="https://www.youtube.com/" target="_blank">
+                    <img src="youtube.png" alt="YouTube Logo" width="25">
+                </a>
+            </section>
+            <hr>
+            <section id="tables" class="tables">
+                <h3>Table Practice</h3>
+                <table border="1" style="border-collapse: collapse;"><!--merges the borders into a single border-->
+                    <caption>Fall 2024 Web Design Talent Show</caption>
+                    <tr>
+                        <th colspan="4" style="background-color: lightskyblue;">Talent Show-Final Leaderboard</th>
+                    </tr>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Contestant</th>
+                        <th>Talent</th>
+                        <th>Score</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td rowspan="2">Rishika</td>
+                        <td>Painting</td>
+                        <td>9.2</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Dancing</td>
+                        <td>9.1</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Justin</td>
+                        <td>Sleeping</td>
+                        <td>9</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Olivia</td>
+                        <td>Juggling</td>
+                        <td>8.9</td>
+                    </tr>
+                </table>
+            </section>
+            <hr>
+            <section id="forms" class="forms">
+                <h3>Forms Practice</h3>
+                <form action="/submit" method="post"></form><!--sends data securely to a URL-->
+                <label for="name">Name:</label><!--connects the label to the input with the id name-->
+                <input type="text" id="name" name="name"><!--text field for input--><br><br>
+                <label>Choose your favorite color:</label><br><!--gives the user question/prompt-->
+                <input type="radio" id="pink" name="color" value="pink">
+                <label for="pink">Pink</label><br>
+                <input type="radio" id="red" name="color" value="red">
+                <label for="red">Red</label><br><br>
+                <hr>
+                <!--a different type of input, but functionally the same thing-->
+                <label>Select Your Hobbies</label><br>
+                <input type="checkbox" id="sports" name="hobby" value="sports">
+                <label for="sports">Sports</label><br>
+                <input type="checkbox" id="music" name="hobby" value="music">
+                <label for="music">Music</label><br>
+                <input type="checkbox" id="shopping" name="hobby" value="shopping">
+                <label for="shopping">Shopping</label><br>
+                <input type="checkbox" id="gaming" name="hobby" value="gaming">
+                <label for="gaming">Gaming</label><br>
+                <br><input type="submit" value="Submit">
+                <input type="button" value="Click Here!" onclick="alert('Your computer has been hacked!')">
+                <hr>
+            </section>
+
+            <section id="specialCharacters" class="specialCharacters">
+                <h3>Special Characters Practice</h3>
+                <!--special characters (character entities), start with & and end with ;. For example: greater than = &gt;, gt being "greater than"-->
+                <p>42 &lt; 84</p>
+                <p>84 &gt; 42</p>
+                <p>&quot;Europa is one of the most likely places to find life in our solar system. Why? Because it probably has an ocean underneath its icy surface.&quot; - NASA</p>
+            </section>
+            <hr>
+            <section id="format" class="format">
+                <!--inline elements that control the format of the text inside of it.-->
+                <h3>Text formatting practice</h3>
+                <p>This is <b>bold text</b> using the &lt;u&gt; tag.</p>
+                <p>This is <strong>strong emphasis </strong> using the &lt;strong&gt; tag.</p>
+                <p>This is <i>italicized text </i>using the &lt;i&gt; tag.</p>
+                <p>This is <u>underlined text </u>using the &lt;u&gt; tag.</p>
+                <p>This is <small>smaller text </small>using the &lt;small&gt; tag.</p>
+                <p>Here is <sup>superscript</sup> and <sub>subscript</sub> text.</p>
+            </section>
+            <hr>
+            <!--using a div, just to demonstrate how they work. I mostly didn't want to nest a div into a section, so this doesn't have a proper nav. Just used to demonstrate inline and block level elements-->
+            <div class="container" id="container">
+            <h2>Block-Level and Inline-Level Elements</h2>
+            <p>This is a paragraph within in &lt;div&gt; element. It creates a full block element of a website.</p>
+            <p><b>This Text</b> has been bolded using the &lt;b&gt; element, an inline element.</p>
+            <p>Block-Level Elements span the whole of a block, while inline elements span just the line or a certain segment of a line.</p>
+            </div>
+            <hr>
+        </main>
+        <!--The main element ends here, and the footer starts just to round out the webpage-->
+        <footer>
+        <p>That's all we have for our HTML Notes!</p>
+        </footer>
+    </body>
+</html>

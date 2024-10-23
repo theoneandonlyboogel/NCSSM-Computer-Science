@@ -1,0 +1,23 @@
+.flex-nav {
+    display: flex;
+    justify-content: space-around;
+    background: white;
+    padding: 1rem;
+    align-items: center;
+}
+
+.nav-item {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    /* Add hover effects */
+    transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+    /* Create a glowing effect */
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+  }

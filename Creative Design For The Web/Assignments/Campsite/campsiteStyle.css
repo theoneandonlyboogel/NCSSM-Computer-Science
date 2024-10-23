@@ -1,0 +1,53 @@
+pre {
+    color: white;
+    font-size: 27px;
+}
+
+h1 {
+  color: white;
+  font-size: 50px;
+  text-align: center;
+}
+body {
+    background-color: black;
+}
+
+p {
+  color: white;
+  font-size: 18px;
+
+}
+
+.animation-container {
+  background-color: black;
+  color: green;
+  
+}
+
+.frame1, .frame2 {
+  font-family: Courier New;
+  position: absolute;
+
+}
+@keyframes frameSwitch {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.frame1 {
+  animation: frameSwitch 2s infinite;
+  animation-delay: 0s;
+}
+
+.frame2 {
+  animation: frameSwitch 2s infinite;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+}
