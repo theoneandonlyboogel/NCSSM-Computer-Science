@@ -1,0 +1,73 @@
+  .logo {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px auto;
+    width: 100%;
+    position: relative;
+    right: 3vw;
+  }
+  
+  .logo img {
+    height: 40vw;
+    margin: 0 auto;
+  }
+  
+  .smartText pre {
+    text-align: left;
+    font-size: 5.5vw; /* Scales with viewport width */
+    margin: 20px auto;
+    color: #F7FFF7;
+    font-family: 'Pixelify Sans', serif;
+    position: relative;
+    right: 5vw;
+  }
+
+/* Default container style */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 5px;
+  height: 92vh; /* Default height for landscape */
+}
+
+/* Shrink to 25vh in vertical (portrait) mode */
+@media (max-aspect-ratio: 3/2) {
+  .container {
+    height: 25vh;
+  }
+}
+
+  .container .logo,
+  .container .smartText {
+    flex: 1 1 45%; /* Split text and image evenly */
+    max-width: 100%;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+  
+    .container .logo,
+    .container .smartText {
+      flex: 1 1 100%; /* Stack on smaller screens */
+      text-align: center;
+    }
+  }
+
+.container1 .quote, 
+.container1 .missionStatement, 
+.container1 .teamAbout {
+  position: relative;
+  top: 125%;
+  display: block;
+  padding: 5em;
+  font-family: "Pixelify Sans", serif;
+  color: #F7FFF7;
+  font-size: 25px;
+}
+

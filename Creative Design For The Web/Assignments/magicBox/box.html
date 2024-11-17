@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magic Box</title>
+  <link rel="stylesheet" href="boxStyle.css">
+  <script src="boxScript.js" defer></script> <!-- Defer is being used because the value would get passed too early otherwise -->
+</head>
+<body>
+  <div>
+    <p id="magicBox" style="display: none; width: 200px; height: 100px; background-color: lightblue; text-align: center; line-height: 100px; font-size: 20px; border-radius: 10px; white-space: normal; transition: all 0.3s ease;">
+      Listen To the Beat!
+    </p>
+
+    <button onclick="revealBox()" style="margin: 10px; padding: 10px; font-size: 16px;">Reveal the Magic Box!</button>
+    <button onclick="hideBox()" style="margin: 10px; padding: 10px; font-size: 16px;">Hide the Magic Box</button>
+
+    <input type="number" id="bpmInput" placeholder="Enter BPM" style="margin-top: 10px;">
+    <button onclick="startFlashing()" style="margin-left: 10px; padding: 10px;">Start Flashing</button>
+  </div>
+</body>
+</html>

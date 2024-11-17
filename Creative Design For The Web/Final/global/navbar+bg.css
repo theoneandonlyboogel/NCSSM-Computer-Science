@@ -1,0 +1,121 @@
+body {
+    background-color: #07090F;
+    font-size: 16px;
+  }
+  
+  .nav {
+    display: flex;
+    justify-content: right;
+    margin: 0;
+    padding: 0 20px;
+    margin-right: 10px;
+  }
+  
+  .nav li {
+    display: block;
+    position: sticky;
+    list-style: none;
+    padding: 0;
+    margin: 0 20px;
+    width: 25%;
+  }
+  
+  .nav li a {
+    display: block;
+    position: sticky;
+    font-size: 1.5em;
+    text-decoration: none;
+    background: #000;
+    padding: 0 20px;
+    margin: 0 2px;
+    line-height: 1.67;
+    -webkit-text-fill-color: #F7FFF7;
+    font-family: "Pixelify Sans";
+  
+    /* Add ::after pseudo-element for slant */
+    ::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 100%;
+      background-color: inherit;
+      transform: skewX(-15deg);
+      top: 0;
+      right: -10px;
+    }
+  }
+  
+  /* Media queries for different screen sizes */
+  @media (max-width: 768px) {
+    .nav li {
+        width: 33.33%;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .nav li {
+        width: 50%;
+    }
+  }
+  
+  .nav li:nth-child(1) a {
+    background: #ce161d;
+    color: #ce161d;
+  }
+  
+  .nav li:nth-child(2) a {
+    background: #E7AC0C;
+    color: #E7AC0C;
+  }
+  
+  .nav li:nth-child(3) a {
+    background: #05A000;
+    color: #05A000;
+  }
+  
+  .nav li:nth-child(4) a {
+    background: #0066b3;
+    color: #0066b3;
+  }
+  
+  .nav li:nth-child(5) a {
+    background: #AA00BD;
+    color: #AA00BD;
+  }
+  
+  .nav li a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 100%;
+    border: 20px solid;
+    border-left-color: transparent !important;
+    border-top-color: transparent !important;  
+  
+  }
+  
+  .nav li a::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 100%;
+    border: 20px solid;
+    border-right-color: transparent !important;
+    border-bottom-color: transparent !important;  
+  
+  }
+  
+  .nav li a:hover {
+    background: #0040ff;
+  }
+  
+  .nav li a:hover::before, .nav li a:hover::after {
+    border-color: #0040ff;
+  }
+  
+  .pixelify-sans-font {
+      font-family: "Pixelify Sans", serif;
+      font-optical-sizing: auto;
+      font-weight: 500;
+      font-style: normal;
+    }
