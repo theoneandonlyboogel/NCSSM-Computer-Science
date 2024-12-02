@@ -1,0 +1,30 @@
+.mapContainer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+h1, h2, h3, p, pre {
+    font-family: "Pixelify Sans", serif;
+    color: #F7FFF7;
+    text-align: center;
+}
+
+.containerLeft iframe,
+.containerRight iframe {
+    padding: 2vw;
+    width: 45vw;
+    height: 50vh;
+    display: block;
+}
+h1 {
+    font-size: 3.5vh;
+}
+
+h2 {
+    font-size: 2.5vh;
+}
+
+p {
+    font-size: 2vh;
+}

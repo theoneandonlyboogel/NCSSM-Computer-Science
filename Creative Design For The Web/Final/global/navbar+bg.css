@@ -1,4 +1,4 @@
-body {
+  body {
     background-color: #07090F;
     font-size: 16px;
   }
@@ -9,7 +9,13 @@ body {
     margin: 0;
     padding: 0 20px;
     margin-right: 10px;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* keeps it above other elements */
+    background-color: #07090F;
   }
+  
   
   .nav li {
     display: block;
@@ -58,6 +64,7 @@ body {
     }
   }
   
+  /*colors each nav based on child number */
   .nav li:nth-child(1) a {
     background: #ce161d;
     color: #ce161d;
@@ -83,6 +90,7 @@ body {
     color: #AA00BD;
   }
   
+  /*these provide the slant before and after each nav*/
   .nav li a::before {
     content: '';
     position: absolute;
@@ -119,3 +127,5 @@ body {
       font-weight: 500;
       font-style: normal;
     }
+
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
