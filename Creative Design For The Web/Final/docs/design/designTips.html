@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Design Tips | SMART #6932</title>
+        <!--CSS to change the navbar and bg across all pages-->
+        <link rel="stylesheet" href="../../global/navbar+bg.css">
+        <!--CSS to change individual file-->
+        <link rel="stylesheet" href="../docsStyle.css">
+        <link rel="icon" href="../global/smartlogo-textremoved.png" type="image/icon type">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+        </style>
+    </head>
+    <body>
+        <ul class="nav">
+            <li><a href="../../blog/blogContent.html">Blog</a></li>
+            <li><a href="../../comps/compContent.html">Competitions</a></li>
+            <li><a href="../../docs/docsContent.html">Docs</a></li>
+            <li><a href="../../gallery/galleryContent.html">Gallery</a></li>
+            <li><a href="../../homepage/homeContent.html">SMART#6932</a></li>
+        </ul>
+        <hr>
+        <div class="container">
+            <h1>Team SMART's Design Tips</h1>
+            <h2>Before CAD</h2>
+            <ul>
+                <li>Always have some sort of physical drawing or idea before even opening a CAD program. This immensely helps the design process, which can feel daunting without this step.</li>
+                <li>Acknowledge that revisions of a particular design will probably be needed. You may have to go through several revisions before something works properly.</li>
+                <li>Cleverness is cool, but it can be the detriment to a robot's functioning in the season. Keep it simple, yet able to efficiently achieve all that it needs to do.</li>
+            </ul>
+            <h2>CAD Tips</h2>
+            <ul>
+                <li>No matter what CAD software you use, the biggest factor in collaboration with others is being able to constrain your files properly.
+                    <br>
+                    This is a part of CAD that will really get you later if you don't do it properly, and will play a big role in the success of your models.
+                    The best ways to keep a file constrained is to:
+                    <ul>
+                        <li>Never try to fit too many different features in a sketch (ex. a repeating pattern of hexagons is better put in a separate sketch).</li>
+                        <li>Use less lines and use more shapes that your CAD software gives you. They come with constraints that help to make the constraining process easier.</li>
+                        <li>The "fix" constraint does help with sketch elements that are never to change, like the locations of certain points. It is not the easy way out of constraining your models.</li>
+                    </ul>
+                    <img src="./IMGs-for-design/constraints.png" alt="Constraints">
+                </li>
+                <li>Frequently test your individual parts with each other in Assembly files. It doesn't matter if you would ever use the parts like that, sanity checks are very valuable. <br>
+                This can also be done in person with a 3D printer.</li>
+                <li>Design for the manufacturing method you plan to use for a part. For example, you can't have big unsupported overhangs if you plan to 3D print a part, and you can't have small text or details that are smaller than your nozzle. <br>
+                This is one of the biggest parts of robotics, where you typically are working with 3D printers and CNC machines, both of which have large considerations you must make to utilize them properly.
+                <br>
+                <img src="./IMGs-for-design/design3dpl.jpg" alt="Design Considerations for 3D Printing" style="width: 85vw; padding: 10px;"></li>
+            </ul>
+            <h2><a href="../docsContent.html">Go Back</a></h2>
+        </div>
+    </body>
+</html>

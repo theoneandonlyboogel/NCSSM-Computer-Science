@@ -1,0 +1,21 @@
+.container {
+    padding: 1.5em;
+    font-family: "Pixelify Sans", serif;
+    color: #F7FFF7;
+    font-size: 25px;
+}
+
+.docs {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.code, .design, .build {
+    max-width: 28vw;
+    word-wrap: break-word;
+}
+
+a {
+    color: #e6151d;
+}

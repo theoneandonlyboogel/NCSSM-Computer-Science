@@ -1,15 +1,28 @@
-.mapContainer {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-h1, h2, h3, p, pre {
+.mapContainer, .stateAndBeyond {
+    font-size: 25px;
     font-family: "Pixelify Sans", serif;
     color: #F7FFF7;
     text-align: center;
 }
 
+.comp {
+    font-size: 50px;
+    font-family: "Pixelify Sans", serif;
+    color: #F7FFF7;
+    text-align: center;
+}
+
+
+.mapContainer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+/*
+h1, h2, h3, p, pre {
+
+}
+*/
 .containerLeft iframe,
 .containerRight iframe {
     padding: 2vw;
@@ -17,6 +30,8 @@ h1, h2, h3, p, pre {
     height: 50vh;
     display: block;
 }
+
+/*
 h1 {
     font-size: 3.5vh;
 }
@@ -27,4 +42,8 @@ h2 {
 
 p {
     font-size: 2vh;
+}
+*/
+a {
+    color: #e6151d;
 }

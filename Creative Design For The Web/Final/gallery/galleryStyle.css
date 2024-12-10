@@ -1,0 +1,50 @@
+.container {
+    text-align: center;
+    margin: 20px;
+    padding: 1.5em;
+    font-family: "Pixelify Sans", serif;
+    color: #F7FFF7;
+    font-size: 25px;
+  }
+  
+  .photos {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Gallery wrapper */
+  .gallery-wrapper {
+    overflow-x: auto; /* Enable horizontal scrolling */
+    overflow-y: hidden; /* Prevent vertical scrollbars */
+    white-space: nowrap; /* Keep images on the same line */
+    scrollbar-width: thin; /* Firefox scrollbar width */
+    scrollbar-color: darkgray #07090F; /* Firefox scrollbar colors */
+    padding-bottom: 10px; /* Prevent scrollbar overlap with content */
+  }
+  
+  /* Webkit scrollbar customization (Chrome, Edge, Safari) */
+  .gallery-wrapper::-webkit-scrollbar {
+    height: 15px; /* Adjust height of the scrollbar */
+  }
+  
+  .gallery-wrapper::-webkit-scrollbar-thumb {
+    background-color: black; /* Thumb color */
+    border-radius: 10px; /* Rounded corners */
+  }
+  
+  .gallery-wrapper::-webkit-scrollbar-track {
+    background-color: black; /* Track color */
+  }
+  
+  /* Gallery styling */
+  .gallery {
+    display: inline-block;
+  }
+  
+  .gallery img {
+    height: 20vh; /* Adjust based on your design */
+    margin-right: 10px;
+    border-radius: 5px; /* Optional: for rounded corners */
+    object-fit: cover;
+  }

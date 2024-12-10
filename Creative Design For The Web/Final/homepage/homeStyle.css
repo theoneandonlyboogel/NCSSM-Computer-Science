@@ -84,9 +84,10 @@
 }
 
 .container1 .image img{
-  display: flex;
-  justify-content: center;
-  width: 94vw;
+  margin: 3vw;
+  width: 90vw;
+  position: relative;
+  right: 3vw;
 }
 
 
@@ -111,4 +112,9 @@
   object-fit: contain;
   flex: 1 1 calc(25% - 20px);
   padding: 10px;
+}
+
+.container1 .video iframe {
+  width: 60vw;
+  height: 40vw;
 }
