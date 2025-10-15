@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newton's Three Laws Interactive Demo</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the Inter font and better visuals */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+        }
+        .law-section {
+            background: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .law-title {
+            border-bottom: 2px solid #3b82f6;
+        }
+        /* Style for the canvas container to maintain aspect ratio on wide screens */
+        .canvas-container {
+            max-width: 100%;
+            height: auto;
+            margin: auto;
+        }
+        canvas {
+            border: 1px solid #d1d5db;
+            background-color: #eef2ff; /* Light blue background for visual contrast */
+            border-radius: 0.5rem;
+            display: block;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-6xl mx-auto">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-2">
+                Newton's Laws of Motion
+            </h1>
+            <p class="text-xl text-gray-600">
+                Interactive demonstrations of classical mechanics.
+            </p>
+        </header>
+
+        <main class="space-y-12">
+            <!-- Law 1: Inertia -->
+            <section id="law1" class="law-section p-6 md:p-8 rounded-xl">
+                <h2 class="law-title text-3xl font-bold text-gray-800 pb-3 mb-4">
+                    1st Law: Inertia
+                </h2>
+                <p class="text-gray-700 mb-6">
+                    An object at rest stays at rest and an object in motion stays in motion with the same speed and in the same direction unless acted upon by an unbalanced external force.
+                </p>
+
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="md:w-1/2">
+                        <div id="law1-canvas-container" class="canvas-container">
+                            <canvas id="law1Canvas" width="500" height="200"></canvas>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 flex flex-col justify-center space-y-4">
+                        <!-- Law 1 Status and Velocity are now split to prevent layout shift (CLS) -->
+                        <p class="text-lg font-semibold text-blue-700">
+                            Current State: <span id="law1-status">Resting</span>
+                        </p>
+                        <!-- Added a dedicated, fixed-height element for velocity -->
+                        <div id="law1-velocity-display" class="text-base font-normal text-gray-600 h-6"></div> 
+                        
+                        <p class="text-gray-600">
+                            Click the button to apply a momentary force and overcome the object's inertia. The object will keep moving until friction stops it.
+                        </p>
+                        <div class="flex space-x-4">
+                            <button id="applyForce1" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-200">
+                                Apply External Force (10 N)
+                            </button>
+                            <!-- New Law 1 Reset Button -->
+                            <button id="resetLaw1Btn" class="bg-gray-400 hover:bg-gray-500 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-200">
+                                Reset
+                            </button>
+                        </div>
+                        <div id="law1-message" class="text-sm mt-2 text-red-600 h-5"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Law 2: F = ma -->
+            <section id="law2" class="law-section p-6 md:p-8 rounded-xl">
+                <h2 class="law-title text-3xl font-bold text-gray-800 pb-3 mb-4">
+                    2nd Law: Force and Acceleration
+                </h2>
+                <p class="text-gray-700 mb-6">
+                    The acceleration ($a$) of an object is directly proportional to the net force ($F$) acting upon it and inversely proportional to its mass ($m$). ($F = ma$).
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="p-4 bg-gray-50 rounded-lg shadow-inner">
+                        <label for="forceInput" class="block text-sm font-medium text-gray-700 mb-1">Applied Force ($F$, Newtons)</label>
+                        <input type="number" id="forceInput" value="10" min="1" class="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-lg shadow-inner">
+                        <label for="massInput" class="block text-sm font-medium text-gray-700 mb-1">Mass ($m$, kg)</label>
+                        <input type="number" id="massInput" value="2" min="1" class="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div class="p-4 bg-blue-100 rounded-lg shadow-lg flex flex-col justify-center">
+                        <h3 class="text-lg font-semibold text-blue-800">Calculated Acceleration ($a$)</h3>
+                        <p id="accelerationOutput" class="text-4xl font-extrabold text-blue-600 mt-1">5.00 $m/s^2$</p>
+                    </div>
+                </div>
+                <div class="mt-6 text-center">
+                    <p class="text-lg text-gray-600">
+                        Visual Representation: The size of the force vector and the object's resulting speed illustrate $F=ma$.
+                    </p>
+                    <div id="law2-visual" class="h-10 mt-4 bg-gray-200 rounded-full flex items-center p-1 relative overflow-hidden">
+                        <div id="law2-object" class="h-8 bg-gray-800 rounded-full transition-all duration-300 ease-linear"></div>
+                        <div id="law2-force-vector" class="absolute h-1 w-0 bg-red-500 right-0 top-1/2 transform -translate-y-1/2 transition-all duration-300"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Law 3: Action/Reaction -->
+            <section id="law3" class="law-section p-6 md:p-8 rounded-xl">
+                <h2 class="law-title text-3xl font-bold text-gray-800 pb-3 mb-4">
+                    3rd Law: Action and Reaction
+                </h2>
+                <p class="text-gray-700 mb-6">
+                    For every action, there is an equal and opposite reaction. When one object exerts a force on a second object, the second object simultaneously exerts a force equal in magnitude and opposite in direction on the first object.
+                </p>
+
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="md:w-1/2">
+                        <div id="law3-canvas-container" class="canvas-container">
+                            <canvas id="law3Canvas" width="500" height="200"></canvas>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 flex flex-col justify-center space-y-4">
+                        <div class="flex space-x-4">
+                            <button id="startCollision" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-200">
+                                Start Elastic Collision
+                            </button>
+                            <!-- New Law 3 Reset Button -->
+                            <button id="resetLaw3Btn" class="bg-gray-400 hover:bg-gray-500 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-200">
+                                Reset
+                            </button>
+                        </div>
+                        <div class="p-4 bg-indigo-50 rounded-lg text-indigo-800 font-medium">
+                            <p id="law3-message-A" class="mb-1">Block A: Resting</p>
+                            <p id="law3-message-B">Block B: Resting</p>
+                        </div>
+                        <p class="text-sm text-gray-600">
+                            Watch the collision: The force Block A exerts on B is *equal and opposite* to the force Block B exerts on A.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-12 pt-6 border-t border-gray-200 text-gray-500">
+            <p>&copy; 2024 Physics Demo. Built with HTML, JS, and Tailwind CSS.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Global constants and initial setup
+        const DAMPING = 0.985;
+        const INITIAL_VELOCITY = 10;
+        const COLLISION_MASS_A = 1.5;
+        const COLLISION_MASS_B = 1.0;
+        const SLOW_SPEED_A = 3; // New slow speed for Law 3
+        const SLOW_SPEED_B = -2; // New slow speed for Law 3
+
+        /*******************************************
+         * LAW 1: INERTIA (Canvas Demo)
+         *******************************************/
+        const canvas1 = document.getElementById('law1Canvas');
+        const ctx1 = canvas1.getContext('2d');
+        const applyForce1Btn = document.getElementById('applyForce1');
+        const resetLaw1Btn = document.getElementById('resetLaw1Btn'); 
+        // Updated IDs for separating status and velocity display:
+        const law1Status = document.getElementById('law1-status'); 
+        const law1VelocityDisplay = document.getElementById('law1-velocity-display'); 
+        const law1Message = document.getElementById('law1-message');
+
+        let block1 = {
+            x: 50,
+            y: canvas1.height / 2 - 25,
+            width: 50,
+            height: 50,
+            vx: 0,
+            color: '#3b82f6'
+        };
+
+        // Function to reset Law 1 state
+        function resetLaw1() {
+            block1.x = 50;
+            block1.vx = 0;
+            law1Status.textContent = "Resting (Inertia maintained)"; // Updated status text
+            law1VelocityDisplay.textContent = ""; // Clear velocity display
+            law1Message.textContent = "";
+            applyForce1Btn.disabled = false;
+        }
+
+        // Draw the block for Law 1
+        function drawBlock1() {
+            ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
+            ctx1.fillStyle = block1.color;
+            ctx1.fillRect(block1.x, block1.y, block1.width, block1.height);
+
+            // Draw a ground line
+            ctx1.strokeStyle = '#6b7280';
+            ctx1.lineWidth = 2;
+            ctx1.beginPath();
+            ctx1.moveTo(0, canvas1.height / 2 + 25);
+            ctx1.lineTo(canvas1.width, canvas1.height / 2 + 25);
+            ctx1.stroke();
+        }
+
+        // Animation loop for Law 1
+        function animateLaw1() {
+            // Apply velocity
+            block1.x += block1.vx;
+            
+            // Apply damping (simulating friction)
+            block1.vx *= DAMPING; 
+
+            // Check if the block has stopped (velocity is near zero)
+            if (Math.abs(block1.vx) < 0.05) {
+                block1.vx = 0;
+            }
+
+            // Keep block within boundaries (stops blocks from disappearing)
+            if (block1.x < 0) {
+                block1.x = 0;
+                block1.vx = 0;
+            }
+            if (block1.x > canvas1.width - block1.width) {
+                block1.x = canvas1.width - block1.width;
+                block1.vx = 0;
+            }
+
+            drawBlock1();
+
+            // Update state text (UPDATED for no layout shift)
+            if (block1.vx === 0) {
+                law1Status.textContent = "Resting (Inertia maintained)";
+                law1VelocityDisplay.textContent = "";
+                applyForce1Btn.disabled = false;
+                law1Message.textContent = "";
+            } else {
+                law1Status.textContent = "Moving";
+                // Show dynamic velocity on its own line
+                law1VelocityDisplay.textContent = `Velocity: ${block1.vx.toFixed(2)} units/frame`; 
+                law1Message.textContent = "Motion continues until unbalanced force (friction) stops it.";
+                applyForce1Btn.disabled = true; // Disable button while moving
+            }
+
+            requestAnimationFrame(animateLaw1);
+        }
+
+        // Event listener for Law 1 buttons
+        applyForce1Btn.addEventListener('click', () => {
+            if (block1.vx === 0) {
+                // Apply a momentary force (sets initial velocity)
+                block1.vx = INITIAL_VELOCITY; 
+                law1Message.textContent = "External force applied! Motion initiated.";
+            }
+        });
+        resetLaw1Btn.addEventListener('click', resetLaw1); 
+        
+        // Initial call to start the animation
+        animateLaw1();
+
+
+        /*******************************************
+         * LAW 2: F = ma (Input Demo)
+         *******************************************/
+        const forceInput = document.getElementById('forceInput');
+        const massInput = document.getElementById('massInput');
+        const accelerationOutput = document.getElementById('accelerationOutput');
+        const law2Object = document.getElementById('law2-object');
+        const law2ForceVector = document.getElementById('law2-force-vector');
+
+        function updateLaw2() {
+            let F = parseFloat(forceInput.value);
+            let M = parseFloat(massInput.value);
+
+            // Input validation
+            if (isNaN(F) || F <= 0) { F = 10; forceInput.value = 10; }
+            if (isNaN(M) || M <= 0) { M = 2; massInput.value = 2; }
+
+            // Calculate Acceleration: a = F / M
+            const A = F / M;
+
+            // Update output text
+            accelerationOutput.textContent = A.toFixed(2) + " m/s²";
+
+            // Update visual elements
+            
+            // 1. Force Vector size (proportional to F)
+            const maxF = 50; 
+            let vectorWidth = (F / maxF) * 50; 
+            if (vectorWidth > 50) vectorWidth = 50;
+            law2ForceVector.style.width = `${vectorWidth}%`;
+            
+            // 2. Object size (proportional to M)
+            const maxM = 10; 
+            let objectSize = (M / maxM) * 100; 
+            if (objectSize < 20) objectSize = 20; 
+            if (objectSize > 100) objectSize = 100; 
+            law2Object.style.width = `${objectSize}px`;
+
+            // 3. Object speed simulation (proportional to A)
+            const maxA = 20; 
+            let speedFactor = 1 - (A / maxA); 
+            if (speedFactor < 0.1) speedFactor = 0.1;
+            if (speedFactor > 0.9) speedFactor = 0.9;
+            
+            const duration = 2 + (speedFactor * 3); 
+            law2Object.style.animation = `moveLaw2 ${duration}s infinite alternate ease-in-out`;
+        }
+
+        // Define the CSS keyframe animation dynamically for the speed effect
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes moveLaw2 {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(calc(100% - 40px)); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Update visual on input change
+        forceInput.addEventListener('input', updateLaw2);
+        massInput.addEventListener('input', updateLaw2);
+        
+        // Initial setup for Law 2
+        updateLaw2(); 
+
+
+        /*******************************************
+         * LAW 3: ACTION/REACTION (Collision Demo)
+         *******************************************/
+        const canvas3 = document.getElementById('law3Canvas');
+        const ctx3 = canvas3.getContext('2d');
+        const startCollisionBtn = document.getElementById('startCollision');
+        const resetLaw3Btn = document.getElementById('resetLaw3Btn'); 
+        const law3MsgA = document.getElementById('law3-message-A');
+        const law3MsgB = document.getElementById('law3-message-B');
+
+        let blockA = {
+            x: 0,
+            y: canvas3.height / 2 - 20,
+            width: 40,
+            height: 40,
+            mass: COLLISION_MASS_A, // 1.5 kg
+            vx: 0,
+            color: '#ef4444' // Red
+        };
+
+        let blockB = {
+            x: canvas3.width - 40,
+            y: canvas3.height / 2 - 20,
+            width: 40,
+            height: 40,
+            mass: COLLISION_MASS_B, // 1.0 kg
+            vx: 0,
+            color: '#22c55e' // Green
+        };
+
+        let isColliding = false;
+        let isCollisionActive = false;
+        let animationFrame3;
+
+        // Function to reset Law 3 state
+        function resetLaw3() {
+            cancelAnimationFrame(animationFrame3);
+            isCollisionActive = false;
+            isColliding = false;
+            blockA.x = 0;
+            blockB.x = canvas3.width - 40;
+            blockA.vx = 0;
+            blockB.vx = 0;
+            startCollisionBtn.disabled = false;
+            law3MsgA.textContent = "Block A: Resting";
+            law3MsgB.textContent = "Block B: Resting";
+            drawBlocks3();
+            animationFrame3 = null; 
+        }
+
+        // Draw blocks for Law 3
+        function drawBlocks3() {
+            ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
+            
+            // Draw Block A
+            ctx3.fillStyle = blockA.color;
+            ctx3.fillRect(blockA.x, blockA.y, blockA.width, blockA.height);
+            ctx3.fillStyle = 'white';
+            ctx3.font = '12px Inter';
+            ctx3.textAlign = 'center';
+            ctx3.fillText(`A (M=${blockA.mass})`, blockA.x + blockA.width / 2, blockA.y + blockA.height / 2 + 4);
+
+            // Draw Block B
+            ctx3.fillStyle = blockB.color;
+            ctx3.fillRect(blockB.x, blockB.y, blockB.width, blockB.height);
+            ctx3.fillStyle = 'white';
+            ctx3.fillText(`B (M=${blockB.mass})`, blockB.x + blockB.width / 2, blockB.y + blockB.height / 2 + 4);
+
+            // Draw ground
+            ctx3.strokeStyle = '#6b7280';
+            ctx3.lineWidth = 2;
+            ctx3.beginPath();
+            ctx3.moveTo(0, canvas3.height / 2 + 20);
+            ctx3.lineTo(canvas3.width, canvas3.height / 2 + 20);
+            ctx3.stroke();
+        }
+
+        // Simple elastic collision calculation (1D)
+        function resolveCollision() {
+            // Check for overlap
+            if (blockA.x + blockA.width >= blockB.x && blockA.x < blockB.x + blockB.width) {
+                if (isColliding) return; 
+                isColliding = true;
+
+                // 1. Calculate new velocities using conservation of momentum and kinetic energy (elastic collision)
+                const v1_initial = blockA.vx;
+                const v2_initial = blockB.vx;
+                const m1 = blockA.mass;
+                const m2 = blockB.mass;
+
+                const v1_final = (v1_initial * (m1 - m2) + 2 * m2 * v2_initial) / (m1 + m2);
+                const v2_final = (v2_initial * (m2 - m1) + 2 * m1 * v1_initial) / (m1 + m2);
+
+                // 2. Apply the resulting velocities
+                blockA.vx = v1_final;
+                blockB.vx = v2_final;
+
+                // 3. Display the Law 3 concept
+                law3MsgA.textContent = `Block A (M=${m1}): Exerted force on B, received EQUAL & OPPOSITE reaction. Final speed: ${v1_final.toFixed(2)}`;
+                law3MsgB.textContent = `Block B (M=${m2}): Received action force from A, exerted EQUAL & OPPOSITE force back. Final speed: ${v2_final.toFixed(2)}`;
+
+                // Separate blocks slightly to prevent immediate re-collision
+                const overlap = (blockA.x + blockA.width) - blockB.x;
+                blockA.x -= overlap / 2;
+                blockB.x += overlap / 2;
+
+                // Increased delay to 2000ms (2 seconds) for clearer viewing of the result
+                setTimeout(() => {
+                    if (isCollisionActive) {
+                         // Check if they are still moving, if so, update message
+                         if (Math.abs(blockA.vx) > 0.01 || Math.abs(blockB.vx) > 0.01) {
+                            law3MsgA.textContent = `Block A: Moving...`;
+                            law3MsgB.textContent = `Block B: Moving...`;
+                         }
+                    }
+                    isColliding = false;
+                }, 2000); 
+            }
+        }
+
+        // Animation loop for Law 3
+        function animateLaw3() {
+            // Keep the animation loop running passively for draw updates and frame reference
+            animationFrame3 = requestAnimationFrame(animateLaw3);
+
+            if (!isCollisionActive) {
+                drawBlocks3();
+                return;
+            }
+
+            // 1. Update positions
+            blockA.x += blockA.vx;
+            blockB.x += blockB.vx;
+
+            // 2. Resolve collision (F_A_on_B = -F_B_on_A)
+            resolveCollision();
+
+            // 3. Stop condition: Stop once blocks hit the walls 
+            
+            // Stop Block A if it hits the left wall
+            if (blockA.x < 0) {
+                 blockA.x = 0;
+                 blockA.vx = 0;
+            }
+            // Stop Block B if it hits the right wall
+            if (blockB.x > canvas3.width - blockB.width) {
+                 blockB.x = canvas3.width - blockB.width;
+                 blockB.vx = 0;
+            }
+            
+            // Check if the simulation is over
+            if ((blockA.vx === 0 && blockB.vx === 0) && !isColliding) {
+                isCollisionActive = false;
+                startCollisionBtn.disabled = false;
+                law3MsgA.textContent = `Block A: Simulation finished (Final Position).`;
+                law3MsgB.textContent = `Block B: Simulation finished (Final Position).`;
+            }
+
+            drawBlocks3();
+        }
+
+        // Event listener for Law 3 buttons
+        startCollisionBtn.addEventListener('click', () => {
+            if (!isCollisionActive) {
+                isCollisionActive = true;
+                startCollisionBtn.disabled = true;
+                
+                // Reset to initial positions
+                blockA.x = 0;
+                blockB.x = canvas3.width - 40;
+                
+                // Apply slower initial velocities
+                blockA.vx = SLOW_SPEED_A;  // Changed from 5 to 3
+                blockB.vx = SLOW_SPEED_B; // Changed from -4 to -2
+                
+                law3MsgA.textContent = `Block A: Moving right (Initial Velocity: ${SLOW_SPEED_A})`;
+                law3MsgB.textContent = `Block B: Moving left (Initial Velocity: ${SLOW_SPEED_B})`;
+
+                // Ensure the animation loop is running
+                if (!animationFrame3) {
+                     animateLaw3();
+                } 
+            }
+        });
+        resetLaw3Btn.addEventListener('click', resetLaw3); 
+        
+        // Initial call for Law 3
+        drawBlocks3();
+        animateLaw3(); // Start the loop to handle passive drawing
+
+        /*******************************************
+         * Responsive Canvas Handling
+         *******************************************/
+        function resizeCanvas() {
+            const container1 = document.getElementById('law1-canvas-container');
+            const container3 = document.getElementById('law3-canvas-container');
+            
+            // Set canvas width to container width
+            canvas1.width = container1.offsetWidth;
+            canvas3.width = container3.offsetWidth;
+            
+            // Re-center Law 1 block
+            block1.y = canvas1.height / 2 - 25;
+            
+            // Reset Law 3 block positions relative to new size if not active
+            blockA.y = canvas3.height / 2 - 20;
+            blockB.y = canvas3.height / 2 - 20;
+
+            if (!isCollisionActive) {
+                blockA.x = 0;
+                blockB.x = canvas3.width - 40;
+            }
+            
+            // Redraw
+            drawBlock1();
+            drawBlocks3();
+        }
+
+        // Run resize on load and window resize
+        window.addEventListener('resize', resizeCanvas);
+        window.onload = function() {
+            resizeCanvas();
+            // The animation loops are already started
+            updateLaw2();
+        }
+        
+        // Error handling for missing globals in canvas environment
+        if (typeof __app_id === 'undefined') {
+             console.log("Canvas environment globals are missing. Functionality requiring external services will be limited.");
+        }
+
+    </script>
+</body>
+</html>
