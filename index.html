@@ -401,8 +401,8 @@
             ctx3.fillStyle = 'white';
             ctx3.font = '12px Inter';
             ctx3.textAlign = 'center';
-            ctx3.fillText(`A (M=${blockA.mass})`, blockA.x + blockA.width / 2, blockA.y + blockA.height / 2 + 4);
-
+            ctx3.fillText(`A (M=${blockA.mass.toFixed(1)})`, blockA.x + blockA.width / 2, blockA.y + blockA.height / 2 + 4);
+ // Changed to show mass with one decimal point
             // Draw Block B
             ctx3.fillStyle = blockB.color;
             ctx3.fillRect(blockB.x, blockB.y, blockB.width, blockB.height);
